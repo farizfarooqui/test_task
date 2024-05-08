@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:test_task/Constant/app_colors.dart';
 import 'package:test_task/Features/Authentication/widgets/custom_button.dart';
 import 'package:test_task/Features/Authentication/widgets/custom_text_field.dart';
