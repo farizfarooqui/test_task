@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -58,14 +61,27 @@ class LoginScreen extends StatelessWidget {
                           width: MediaQuery.of(context).size.width * 0.94,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Colors.white.withOpacity(
-                                0.3), //how make this color blur effect
-                            border: Border.all(
-                              color: Colors.transparent,
-                            ),
+                            color: Colors.black.withOpacity(0.3),
                           ),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: BackdropFilter(
+                                filter: ImageFilter.blur(
+                                  sigmaX: 5,
+                                  sigmaY: 5,
+                                ),
+                                child: Container(
+                                  color: Colors.black.withOpacity(0.1),
+                                  child: const Center(
+                                    child: Text(
+                                      'Your Content',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              )),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 )
