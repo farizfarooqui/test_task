@@ -1,11 +1,14 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:test_task/Constant/app_colors.dart';
+import 'package:test_task/Features/Authentication/widgets/custom_button.dart';
+import 'package:test_task/Features/Authentication/widgets/custom_text_field.dart';
 
+// ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
-
+  LoginScreen({super.key});
+  TextEditingController passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,24 +63,85 @@ class LoginScreen extends StatelessWidget {
                           height: MediaQuery.of(context).size.height * 0.4,
                           width: MediaQuery.of(context).size.width * 0.94,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.black.withOpacity(0.3),
-                          ),
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.black.withOpacity(0.3),
+                              border: Border.all(
+                                color: Colors.transparent,
+                                width: 0.1,
+                              )),
                           child: ClipRRect(
                               borderRadius: BorderRadius.circular(20),
                               child: BackdropFilter(
                                 filter: ImageFilter.blur(
-                                  sigmaX: 5,
-                                  sigmaY: 5,
+                                  sigmaX: 10,
+                                  sigmaY: 10,
                                 ),
                                 child: Container(
-                                  color: Colors.black.withOpacity(0.1),
-                                  child: const Center(
-                                    child: Text(
-                                      'Your Content',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
+                                  padding: const EdgeInsets.only(
+                                      left: 30, right: 30),
+                                  color: Colors.white.withOpacity(0.1),
+                                  child: Center(
+                                      child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Spacer(),
+                                      const ListTile(
+                                        leading: CircleAvatar(
+                                          backgroundColor: AppColors.green,
+                                        ),
+                                        title: Text(
+                                          'Fariz Farooqui',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        subtitle: Text(
+                                          'farizfarooqui104@gmail.com',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      CustomTextField(
+                                        hintText: 'Password',
+                                        obscureText: true,
+                                        controller: passController,
+                                        suffix: TextButton(
+                                          onPressed: () {},
+                                          child: const Text(
+                                            'View',
+                                            style:
+                                                TextStyle(color: Colors.black),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 15,
+                                      ),
+                                      CustomButton(
+                                        text: 'Continue',
+                                        height: 50,
+                                        backgroundColor: AppColors.green,
+                                        borderColor: AppColors.green,
+                                        textColor: Colors.white,
+                                        onPressed: () {},
+                                        textfontSize: 15,
+                                      ),
+                                      const Spacer(),
+                                      TextButton(
+                                          onPressed: () {},
+                                          child: const Text(
+                                            'Forget Password?',
+                                            style: TextStyle(
+                                              color: AppColors.green,
+                                            ),
+                                          )),
+                                      const Spacer(),
+                                    ],
+                                  )),
                                 ),
                               )),
                         ),
