@@ -63,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                           width: MediaQuery.of(context).size.width * 0.94,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Colors.black.withOpacity(0.3),
+                              color: Colors.white.withOpacity(0.2),
                               border: Border.all(
                                 color: Colors.transparent,
                                 width: 0.1,
@@ -72,13 +72,13 @@ class LoginScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               child: BackdropFilter(
                                 filter: ImageFilter.blur(
-                                  sigmaX: 10,
-                                  sigmaY: 10,
+                                  sigmaX: 2,
+                                  sigmaY: 2,
                                 ),
                                 child: Container(
                                   padding: const EdgeInsets.only(
                                       left: 30, right: 30),
-                                  color: Colors.white.withOpacity(0.1),
+                                  color: Colors.black.withOpacity(0.4),
                                   child: Center(
                                       child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
