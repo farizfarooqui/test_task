@@ -1,13 +1,16 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:test_task/Constant/app_colors.dart';
 import 'package:test_task/Features/Authentication/widgets/custom_button.dart';
+import 'package:test_task/Features/Profile%20screen/profile_screen.dart';
 
 // ignore: must_be_immutable
 class SignScreen extends StatelessWidget {
   SignScreen({super.key});
+  final _formKey = GlobalKey<FormState>();
+
+  TextEditingController nameController = TextEditingController();
+
   TextEditingController passController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
@@ -35,7 +38,9 @@ class SignScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 10, top: 20),
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                       icon: const Icon(
                         Icons.arrow_back_ios_new,
                         color: Colors.white,
@@ -101,69 +106,85 @@ class SignScreen extends StatelessWidget {
                                             fontWeight: FontWeight.w800),
                                       ),
                                       const Spacer(),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: _focusNode.hasFocus
-                                                    ? AppColors.green
-                                                    : Colors.grey),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: TextFormField(
-                                          focusNode: _focusNode,
-                                          style: const TextStyle(
-                                              color: Colors.black),
-                                          obscureText: true,
-                                          decoration: const InputDecoration(
-                                            fillColor: Colors.white,
-                                            filled: true,
-                                            contentPadding:
-                                                EdgeInsets.only(left: 15),
-                                            border: InputBorder.none,
-                                            labelText: "Name",
-                                            labelStyle: TextStyle(
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 12,
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: _focusNode.hasFocus
-                                                    ? AppColors.green
-                                                    : Colors.grey),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: TextFormField(
-                                          focusNode: _focusNode,
-                                          style: const TextStyle(
-                                              color: Colors.black),
-                                          obscureText: true,
-                                          decoration: InputDecoration(
-                                            fillColor: Colors.white,
-                                            filled: true,
-                                            suffixIcon: TextButton(
-                                              onPressed: () {},
-                                              child: const Text(
-                                                'View',
-                                                style: TextStyle(
-                                                    color: Colors.black),
+                                      Form(
+                                          key: _formKey,
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: _focusNode
+                                                                .hasFocus
+                                                            ? AppColors.green
+                                                            : Colors.grey),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: TextFormField(
+                                                  controller: nameController,
+                                                  focusNode: _focusNode,
+                                                  style: const TextStyle(
+                                                      color: Colors.black),
+                                                  obscureText: false,
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    fillColor: Colors.white,
+                                                    filled: true,
+                                                    contentPadding:
+                                                        EdgeInsets.only(
+                                                            left: 15),
+                                                    border: InputBorder.none,
+                                                    labelText: "Name",
+                                                    labelStyle: TextStyle(
+                                                      color: Colors.grey,
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                            contentPadding:
-                                                const EdgeInsets.only(left: 15),
-                                            border: InputBorder.none,
-                                            labelText: "Password",
-                                            labelStyle: const TextStyle(
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                              const SizedBox(
+                                                height: 12,
+                                              ),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: _focusNode
+                                                                .hasFocus
+                                                            ? AppColors.green
+                                                            : Colors.grey),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: TextFormField(
+                                                  controller: passController,
+                                                  focusNode: _focusNode,
+                                                  style: const TextStyle(
+                                                      color: Colors.black),
+                                                  obscureText: true,
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.white,
+                                                    filled: true,
+                                                    suffixIcon: TextButton(
+                                                      onPressed: () {},
+                                                      child: const Text(
+                                                        'View',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    ),
+                                                    contentPadding:
+                                                        const EdgeInsets.only(
+                                                            left: 15),
+                                                    border: InputBorder.none,
+                                                    labelText: "Password",
+                                                    labelStyle: const TextStyle(
+                                                      color: Colors.grey,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          )),
                                       const SizedBox(
                                         height: 15,
                                       ),
@@ -204,7 +225,15 @@ class SignScreen extends StatelessWidget {
                                           backgroundColor: AppColors.green,
                                           borderColor: AppColors.green,
                                           textColor: Colors.white,
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (_) =>
+                                                    const ProfileScreen(),
+                                              ),
+                                            );
+                                          },
                                           textfontSize: 15),
                                       const Spacer(),
                                     ],

@@ -96,9 +96,10 @@ class LandingScreen extends StatelessWidget {
                                       Container(
                                         decoration: BoxDecoration(
                                             border: Border.all(
+                                                width: 3,
                                                 color: _focusNode.hasFocus
                                                     ? AppColors.green
-                                                    : Colors.grey),
+                                                    : Colors.transparent),
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                         child: TextFormField(
@@ -106,14 +107,16 @@ class LandingScreen extends StatelessWidget {
                                           style: const TextStyle(
                                               color: Colors.black),
                                           obscureText: true,
-                                          decoration: const InputDecoration(
+                                          decoration: InputDecoration(
                                             fillColor: Colors.white,
                                             filled: true,
                                             contentPadding:
-                                                EdgeInsets.only(left: 15),
-                                            border: InputBorder.none,
+                                                const EdgeInsets.only(left: 15),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
                                             labelText: "Email",
-                                            labelStyle: TextStyle(
+                                            labelStyle: const TextStyle(
                                               color: Colors.grey,
                                             ),
                                           ),
@@ -190,33 +193,33 @@ class LandingScreen extends StatelessWidget {
                                               color: Colors.white,
                                             ),
                                           ),
-                                          GestureDetector(
-                                            onDoubleTap: () {
+                                          InkWell(
+                                            onTap: () {
                                               Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (_) =>
-                                                          SignScreen()));
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (_) => SignScreen(),
+                                                ),
+                                              );
                                             },
                                             child: const Text(
                                               'SignUp',
                                               style: TextStyle(
                                                   color: AppColors.green),
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                       const SizedBox(
                                         height: 12,
                                       ),
-                                      TextButton(
-                                          onPressed: () {},
-                                          child: const Text(
-                                            'Forget Password?',
-                                            style: TextStyle(
-                                              color: AppColors.green,
-                                            ),
-                                          )),
+                                      const InkWell(
+                                          child: Text(
+                                        'Forget Password?',
+                                        style: TextStyle(
+                                          color: AppColors.green,
+                                        ),
+                                      )),
                                       const SizedBox(
                                         height: 12,
                                       ),
