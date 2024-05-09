@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:test_task/Features/Authentication/landing_screen.dart';
 import 'package:test_task/Features/Authentication/login_screen.dart';
+import 'package:test_task/Features/Authentication/sign_up_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: LandingScreen(),
     );
   }
 }

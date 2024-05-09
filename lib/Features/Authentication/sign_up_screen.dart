@@ -1,11 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:test_task/Constant/app_colors.dart';
 import 'package:test_task/Features/Authentication/widgets/custom_button.dart';
 
 // ignore: must_be_immutable
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class SignScreen extends StatelessWidget {
+  SignScreen({super.key});
   TextEditingController passController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
@@ -52,7 +54,7 @@ class LoginScreen extends StatelessWidget {
                             bottom: MediaQuery.of(context).size.width * 0.04,
                             left: MediaQuery.of(context).size.width * 0.1),
                         child: const Text(
-                          'Log in',
+                          'Sign Up',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 34,
@@ -61,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       Center(
                         child: Container(
-                          height: MediaQuery.of(context).size.height * 0.4,
+                          height: MediaQuery.of(context).size.height * 0.5,
                           width: MediaQuery.of(context).size.width * 0.94,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
@@ -88,24 +90,46 @@ class LoginScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       const Spacer(),
-                                      const ListTile(
-                                        leading: CircleAvatar(
-                                          backgroundColor: AppColors.green,
-                                        ),
-                                        title: Text(
-                                          'Fariz Farooqui',
-                                          style: TextStyle(
+                                      const Text(
+                                        'Looks like you don\'t have an account.\nlets create a new account for',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      const Text(
+                                        'farizfarooqui104@gmail.com',
+                                        style: TextStyle(
                                             color: Colors.white,
-                                          ),
-                                        ),
-                                        subtitle: Text(
-                                          'farizfarooqui104@gmail.com',
-                                          style: TextStyle(
-                                            color: Colors.white,
+                                            fontWeight: FontWeight.w800),
+                                      ),
+                                      const Spacer(),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: _focusNode.hasFocus
+                                                    ? AppColors.green
+                                                    : Colors.grey),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: TextFormField(
+                                          focusNode: _focusNode,
+                                          style: const TextStyle(
+                                              color: Colors.black),
+                                          obscureText: true,
+                                          decoration: const InputDecoration(
+                                            fillColor: Colors.white,
+                                            filled: true,
+                                            contentPadding:
+                                                EdgeInsets.only(left: 15),
+                                            border: InputBorder.none,
+                                            labelText: "Name",
+                                            labelStyle: TextStyle(
+                                              color: Colors.grey,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                      const Spacer(),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
                                       Container(
                                         decoration: BoxDecoration(
                                             border: Border.all(
@@ -143,24 +167,45 @@ class LoginScreen extends StatelessWidget {
                                       const SizedBox(
                                         height: 15,
                                       ),
-                                      CustomButton(
-                                        text: 'Continue',
-                                        height: 50,
-                                        backgroundColor: AppColors.green,
-                                        borderColor: AppColors.green,
-                                        textColor: Colors.white,
-                                        onPressed: () {},
-                                        textfontSize: 15,
+                                      const Text.rich(
+                                        TextSpan(
+                                          text:
+                                              'By selecting Agree and continue below,\nI Agree to ',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                          children: [
+                                            TextSpan(
+                                              text: 'Terms and Service ',
+                                              style: TextStyle(
+                                                color: AppColors.green,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            TextSpan(
+                                              text: 'and ',
+                                              style: TextStyle(
+                                                  color: AppColors.green),
+                                            ),
+                                            TextSpan(
+                                              text: 'Privacy Policy',
+                                              style: TextStyle(
+                                                color: AppColors.green,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       const Spacer(),
-                                      TextButton(
+                                      CustomButton(
+                                          text: 'Agree and Continue',
+                                          height: 60,
+                                          backgroundColor: AppColors.green,
+                                          borderColor: AppColors.green,
+                                          textColor: Colors.white,
                                           onPressed: () {},
-                                          child: const Text(
-                                            'Forget Password?',
-                                            style: TextStyle(
-                                              color: AppColors.green,
-                                            ),
-                                          )),
+                                          textfontSize: 20),
                                       const Spacer(),
                                     ],
                                   )),

@@ -37,14 +37,16 @@ class CustomTextField extends StatelessWidget {
         fillColor: Colors.white,
         filled: true,
         suffixIcon: suffix,
+        border: InputBorder.none,
+        labelText: "password",
         hintText: hintText,
         hintStyle: const TextStyle(
           fontSize: 14,
           color: Colors.grey,
         ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        // border: OutlineInputBorder(
+        //   borderRadius: BorderRadius.circular(8),
+        // ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: const BorderSide(
@@ -65,3 +67,7 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
+
+
+
+

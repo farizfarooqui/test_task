@@ -1,11 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:test_task/Constant/app_colors.dart';
+import 'package:test_task/Features/Authentication/sign_up_screen.dart';
 import 'package:test_task/Features/Authentication/widgets/custom_button.dart';
 
 // ignore: must_be_immutable
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LandingScreen extends StatelessWidget {
+  LandingScreen({super.key});
   TextEditingController passController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
@@ -52,7 +54,7 @@ class LoginScreen extends StatelessWidget {
                             bottom: MediaQuery.of(context).size.width * 0.04,
                             left: MediaQuery.of(context).size.width * 0.1),
                         child: const Text(
-                          'Log in',
+                          'Hi!',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 34,
@@ -61,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       Center(
                         child: Container(
-                          height: MediaQuery.of(context).size.height * 0.4,
+                          height: MediaQuery.of(context).size.height * 0.53,
                           width: MediaQuery.of(context).size.width * 0.94,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
@@ -87,25 +89,9 @@ class LoginScreen extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Spacer(),
-                                      const ListTile(
-                                        leading: CircleAvatar(
-                                          backgroundColor: AppColors.green,
-                                        ),
-                                        title: Text(
-                                          'Fariz Farooqui',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        subtitle: Text(
-                                          'farizfarooqui104@gmail.com',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                        ),
+                                      const SizedBox(
+                                        height: 30,
                                       ),
-                                      const Spacer(),
                                       Container(
                                         decoration: BoxDecoration(
                                             border: Border.all(
@@ -119,29 +105,21 @@ class LoginScreen extends StatelessWidget {
                                           style: const TextStyle(
                                               color: Colors.black),
                                           obscureText: true,
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             fillColor: Colors.white,
                                             filled: true,
-                                            suffixIcon: TextButton(
-                                              onPressed: () {},
-                                              child: const Text(
-                                                'View',
-                                                style: TextStyle(
-                                                    color: Colors.black),
-                                              ),
-                                            ),
                                             contentPadding:
-                                                const EdgeInsets.only(left: 15),
+                                                EdgeInsets.only(left: 15),
                                             border: InputBorder.none,
-                                            labelText: "Password",
-                                            labelStyle: const TextStyle(
+                                            labelText: "Email",
+                                            labelStyle: TextStyle(
                                               color: Colors.grey,
                                             ),
                                           ),
                                         ),
                                       ),
                                       const SizedBox(
-                                        height: 15,
+                                        height: 12,
                                       ),
                                       CustomButton(
                                         text: 'Continue',
@@ -152,7 +130,81 @@ class LoginScreen extends StatelessWidget {
                                         onPressed: () {},
                                         textfontSize: 15,
                                       ),
-                                      const Spacer(),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      const Center(
+                                        child: Text(
+                                          'Or',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      CustomButton(
+                                        text: 'Continue with Facebook',
+                                        height: 50,
+                                        backgroundColor: Colors.white,
+                                        borderColor: Colors.white,
+                                        textColor: Colors.black,
+                                        onPressed: () {},
+                                        textfontSize: 15,
+                                      ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      CustomButton(
+                                        text: 'Continue with Google',
+                                        height: 50,
+                                        backgroundColor: Colors.white,
+                                        borderColor: Colors.white,
+                                        textColor: Colors.black,
+                                        onPressed: () {},
+                                        textfontSize: 15,
+                                      ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      CustomButton(
+                                        text: 'Continue with Apple',
+                                        height: 50,
+                                        backgroundColor: Colors.white,
+                                        borderColor: Colors.white,
+                                        textColor: Colors.black,
+                                        onPressed: () {},
+                                        textfontSize: 15,
+                                      ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            'Dont have an account? ',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onDoubleTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          SignScreen()));
+                                            },
+                                            child: const Text(
+                                              'SignUp',
+                                              style: TextStyle(
+                                                  color: AppColors.green),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
                                       TextButton(
                                           onPressed: () {},
                                           child: const Text(
@@ -161,7 +213,9 @@ class LoginScreen extends StatelessWidget {
                                               color: AppColors.green,
                                             ),
                                           )),
-                                      const Spacer(),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
                                     ],
                                   )),
                                 ),
