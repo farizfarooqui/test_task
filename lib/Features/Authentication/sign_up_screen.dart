@@ -205,7 +205,7 @@ class SignScreen extends StatelessWidget {
                                           borderColor: AppColors.green,
                                           textColor: Colors.white,
                                           onPressed: () {},
-                                          textfontSize: 20),
+                                          textfontSize: 15),
                                       const Spacer(),
                                     ],
                                   )),

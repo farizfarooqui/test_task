@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:test_task/Constant/app_colors.dart';
 import 'package:test_task/Features/Authentication/sign_up_screen.dart';
 import 'package:test_task/Features/Authentication/widgets/custom_button.dart';
+import 'package:test_task/Features/Authentication/widgets/custom_link_button.dart';
 
 // ignore: must_be_immutable
 class LandingScreen extends StatelessWidget {
@@ -142,7 +143,7 @@ class LandingScreen extends StatelessWidget {
                                       const SizedBox(
                                         height: 12,
                                       ),
-                                      CustomButton(
+                                      CustomLinkButton(
                                         text: 'Continue with Facebook',
                                         height: 50,
                                         backgroundColor: Colors.white,
@@ -150,11 +151,12 @@ class LandingScreen extends StatelessWidget {
                                         textColor: Colors.black,
                                         onPressed: () {},
                                         textfontSize: 15,
+                                        imagePath: 'assets/images/facebook.png',
                                       ),
                                       const SizedBox(
                                         height: 12,
                                       ),
-                                      CustomButton(
+                                      CustomLinkButton(
                                         text: 'Continue with Google',
                                         height: 50,
                                         backgroundColor: Colors.white,
@@ -162,11 +164,12 @@ class LandingScreen extends StatelessWidget {
                                         textColor: Colors.black,
                                         onPressed: () {},
                                         textfontSize: 15,
+                                        imagePath: 'assets/images/google.png',
                                       ),
                                       const SizedBox(
                                         height: 12,
                                       ),
-                                      CustomButton(
+                                      CustomLinkButton(
                                         text: 'Continue with Apple',
                                         height: 50,
                                         backgroundColor: Colors.white,
@@ -174,6 +177,7 @@ class LandingScreen extends StatelessWidget {
                                         textColor: Colors.black,
                                         onPressed: () {},
                                         textfontSize: 15,
+                                        imagePath: 'assets/images/apple.png',
                                       ),
                                       const SizedBox(
                                         height: 12,
