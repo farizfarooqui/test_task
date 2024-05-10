@@ -39,15 +39,23 @@ class SignUpController extends GetxController {
       String userName = userData['fullName'];
       String userEmail = userData['email'];
 
-      // Navigate to profile screen with user data
       Get.off(() => ProfileScreen(userName: userName, userEmail: userEmail));
-      XHelperFunctions.showToastMessage(message: 'Signup successful!');
-      return null;
+      XHelperFunctions.showToastMessage(message: 'Signup successfully !');
     } catch (e) {
       XHelperFunctions.showToastMessage(message: 'Error: ${e.toString()}');
       log('error: ${e.toString()}');
       isLoading.value = false;
       throw Exception(e);
     }
+  }
+
+  Future<void> signOut() async {
+    await auth.signOut();
+    Get.find<LoginController>().email = '';
+    Get.find<LoginController>().password = '';
+    Get.find<LoginController>().email = '';
+    Get.find<SignUpController>().password = '';
+    Get.find<SignUpController>().isLoading.value = false;
+    Get.find<LoginController>().isLoading.value = false;
   }
 }

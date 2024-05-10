@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:test_task/Constant/app_colors.dart';
 import 'package:test_task/Features/Authentication/auth_controller/login_controller.dart';
 import 'package:test_task/Features/Authentication/widgets/custom_button.dart';
@@ -8,7 +9,10 @@ import 'package:test_task/Features/Authentication/widgets/custom_text_field.dart
 
 // ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+  final String userName;
+  final String userEmail;
+
+  LoginScreen({super.key, required this.userName, required this.userEmail});
   final loginController = Get.find<LoginController>();
 
   @override
@@ -35,7 +39,9 @@ class LoginScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 10, top: 20),
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.back();
+                      },
                       icon: const Icon(
                         Icons.arrow_back_ios_new,
                         color: Colors.white,
@@ -91,18 +97,18 @@ class LoginScreen extends StatelessWidget {
                                     children: [
                                       const Spacer(),
                                       ListTile(
-                                        leading: CircleAvatar(
+                                        leading: const CircleAvatar(
                                           backgroundColor: AppColors.green,
                                         ),
                                         title: Text(
-                                          '',
-                                          style: TextStyle(
+                                          userName,
+                                          style: const TextStyle(
                                             color: Colors.white,
                                           ),
                                         ),
                                         subtitle: Text(
-                                          loginController.email,
-                                          style: TextStyle(
+                                          userEmail,
+                                          style: const TextStyle(
                                             color: Colors.white,
                                           ),
                                         ),

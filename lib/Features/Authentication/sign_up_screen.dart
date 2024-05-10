@@ -39,7 +39,7 @@ class SignScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 10, top: 20),
                   child: IconButton(
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        Get.back();
                       },
                       icon: const Icon(
                         Icons.arrow_back_ios_new,

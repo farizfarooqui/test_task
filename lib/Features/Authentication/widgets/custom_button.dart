@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_task/Constant/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -40,7 +41,10 @@ class CustomButton extends StatelessWidget {
             Size(width ?? double.infinity, height)), // Butto  height and width
       ),
       child: isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(
+              child: CircularProgressIndicator(
+              color: AppColors.white,
+            ))
           : Text(
               text,
               style: Theme.of(context)

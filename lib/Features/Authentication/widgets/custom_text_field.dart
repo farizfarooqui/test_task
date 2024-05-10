@@ -112,8 +112,8 @@ class _InputFieldState extends State<InputField> {
                                   setState(() {});
                                 },
                                 child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(right: 13, top: 10),
+                                  padding: const EdgeInsets.only(
+                                      right: 13, top: 10, bottom: 0),
                                   child: Align(
                                     alignment: Alignment.centerRight,
                                     child: Text(isObsecure ? 'View' : 'Hide',

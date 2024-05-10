@@ -7,7 +7,7 @@ class AppStyle {
     return InputDecoration(
       hintText: labelText,
       suffixIcon: suffixIcon,
-      contentPadding: EdgeInsets.only(left: 15, bottom: hasFocus ? 15 : 0),
+      contentPadding: EdgeInsets.only(left: 15, bottom: hasFocus ? 12 : 0),
       hintStyle: const TextStyle(fontSize: 15, color: AppColors.darkGrey),
       border: InputBorder.none,
     );

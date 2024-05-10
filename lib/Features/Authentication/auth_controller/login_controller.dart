@@ -34,7 +34,7 @@ class LoginController extends GetxController {
 
       // Navigate to profile screen with user data
       Get.off(() => ProfileScreen(userName: userName, userEmail: userEmail));
-      XHelperFunctions.showToastMessage(message: 'login successful!');
+      XHelperFunctions.showToastMessage(message: 'Login successfully !');
     } catch (e) {
       XHelperFunctions.showToastMessage(message: 'Error: ${e.toString()}');
       log('error: ${e.toString()}');
@@ -49,20 +49,27 @@ class LoginController extends GetxController {
       log(email);
       log(password);
 
-      // Check if the email is already in use
+      // Checking if the email is already in use
       QuerySnapshot<Map<String, dynamic>> existingUsers = await _firestore
           .collection('Users')
           .where('email', isEqualTo: email)
           .get();
 
       if (existingUsers.docs.isNotEmpty) {
-        XHelperFunctions.showToastMessage(message: 'Email already in use');
-        Get.off(() => LoginScreen());
         isLoading.value = false;
+        DocumentSnapshot<Map<String, dynamic>> userData =
+            await FirebaseFirestore.instance
+                .collection('Users')
+                .doc(email)
+                .get();
+        String userName = userData['fullName'];
+        String userEmail = userData['email'];
+        Get.to(() => LoginScreen(userName: userName, userEmail: userEmail));
+        XHelperFunctions.showToastMessage(message: 'Welcome Back !');
         return;
       } else {
-        XHelperFunctions.showToastMessage(message: 'Create account');
-        Get.off(() => SignScreen());
+        XHelperFunctions.showToastMessage(message: 'Kindly create a account');
+        Get.to(() => SignScreen());
         isLoading.value = false;
       }
     } catch (e) {

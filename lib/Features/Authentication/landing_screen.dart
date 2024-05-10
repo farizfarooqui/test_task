@@ -97,7 +97,6 @@ class LandingScreen extends StatelessWidget {
                                         height: 30,
                                       ),
                                       InputField(
-                                          passwordField: false,
                                           labelText: 'Email',
                                           onChanged: (value) {
                                             controller.email = value;
