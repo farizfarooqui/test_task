@@ -1,13 +1,15 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test_task/Constant/app_colors.dart';
+import 'package:test_task/Features/Authentication/auth_controller/login_controller.dart';
 import 'package:test_task/Features/Authentication/widgets/custom_button.dart';
+import 'package:test_task/Features/Authentication/widgets/custom_text_field.dart';
 
 // ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
-  TextEditingController passController = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
+  final loginController = Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -88,69 +90,48 @@ class LoginScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       const Spacer(),
-                                      const ListTile(
+                                      ListTile(
                                         leading: CircleAvatar(
                                           backgroundColor: AppColors.green,
                                         ),
                                         title: Text(
-                                          'Fariz Farooqui',
+                                          '',
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
                                         ),
                                         subtitle: Text(
-                                          'farizfarooqui104@gmail.com',
+                                          loginController.email,
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
                                         ),
                                       ),
                                       const Spacer(),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: _focusNode.hasFocus
-                                                    ? AppColors.green
-                                                    : Colors.grey),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: TextFormField(
-                                          focusNode: _focusNode,
-                                          style: const TextStyle(
-                                              color: Colors.black),
-                                          obscureText: true,
-                                          decoration: InputDecoration(
-                                            fillColor: Colors.white,
-                                            filled: true,
-                                            suffixIcon: TextButton(
-                                              onPressed: () {},
-                                              child: const Text(
-                                                'View',
-                                                style: TextStyle(
-                                                    color: Colors.black),
-                                              ),
-                                            ),
-                                            contentPadding:
-                                                const EdgeInsets.only(left: 15),
-                                            border: InputBorder.none,
-                                            labelText: "Password",
-                                            labelStyle: const TextStyle(
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ),
+                                      InputField(
+                                        passwordField: true,
+                                        labelText: 'Password',
+                                        onChanged: (value) {
+                                          loginController.password = value;
+                                        },
                                       ),
                                       const SizedBox(
                                         height: 15,
                                       ),
-                                      CustomButton(
-                                        text: 'Continue',
-                                        height: 50,
-                                        backgroundColor: AppColors.green,
-                                        borderColor: AppColors.green,
-                                        textColor: Colors.white,
-                                        onPressed: () {},
-                                        textfontSize: 15,
+                                      Obx(
+                                        () => CustomButton(
+                                          text: 'Continue',
+                                          isLoading:
+                                              loginController.isLoading.value,
+                                          height: 50,
+                                          backgroundColor: AppColors.green,
+                                          borderColor: AppColors.green,
+                                          textColor: Colors.white,
+                                          onPressed: () async {
+                                            await loginController.loogin();
+                                          },
+                                          textfontSize: 15,
+                                        ),
                                       ),
                                       const Spacer(),
                                       TextButton(

@@ -1,8 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:test_task/Constant/app_colors.dart';
+import 'package:test_task/Features/Authentication/auth_controller/login_controller.dart';
+import 'package:test_task/Features/Authentication/auth_controller/signup_controller.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+   final String userName;
+  final String userEmail;
+
+  ProfileScreen({super.key, required this.userName, required this.userEmail});
+
+  // final user = FirebaseAuth.instance.currentUser!.email;
+  final controller = Get.put(SignUpController());
+  final signController = Get.find<SignUpController>();
 
   @override
   Widget build(BuildContext context) {
@@ -12,17 +24,13 @@ class ProfileScreen extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              AppColors.green,
-              Colors.black,
-              Colors.black
-            ],
+            colors: [AppColors.green, Colors.black, Colors.black],
           ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(
+            SizedBox(
               height: 24,
             ),
             ListTile(
@@ -58,14 +66,14 @@ class ProfileScreen extends StatelessWidget {
               height: 5,
             ),
             Text(
-              'Fariz Farooqui',
+              signController.name,
               style: TextStyle(fontSize: 20, color: AppColors.white),
             ),
             const SizedBox(
               height: 3,
             ),
             Text(
-              'farizfarooqui104@gmail.com',
+              signController.email,
               style: TextStyle(color: AppColors.white),
             ),
             const SizedBox(

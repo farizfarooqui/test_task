@@ -9,6 +9,7 @@ class CustomButton extends StatelessWidget {
   final double height;
   final double? width;
   final VoidCallback? onPressed;
+  final bool isLoading;
 
   const CustomButton({
     super.key,
@@ -20,6 +21,7 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     this.width,
     required this.textfontSize,
+    this.isLoading = false,
   });
 
   @override
@@ -37,13 +39,15 @@ class CustomButton extends StatelessWidget {
         minimumSize: MaterialStateProperty.all(
             Size(width ?? double.infinity, height)), // Butto  height and width
       ),
-      child: Text(
-        text,
-        style: Theme.of(context)
-            .textTheme
-            .bodyLarge!
-            .copyWith(fontSize: textfontSize, color: textColor),
-      ),
+      child: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Text(
+              text,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge!
+                  .copyWith(fontSize: textfontSize, color: textColor),
+            ),
     );
   }
 }

@@ -1,16 +1,19 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:test_task/Bindings/signup_binding.dart';
 import 'package:test_task/Constant/app_colors.dart';
+import 'package:test_task/Features/Authentication/auth_controller/login_controller.dart';
 import 'package:test_task/Features/Authentication/sign_up_screen.dart';
 import 'package:test_task/Features/Authentication/widgets/custom_button.dart';
 import 'package:test_task/Features/Authentication/widgets/custom_link_button.dart';
+import 'package:test_task/Features/Authentication/widgets/custom_text_field.dart';
 
 // ignore: must_be_immutable
 class LandingScreen extends StatelessWidget {
   LandingScreen({super.key});
   TextEditingController passController = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
+  final controller = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -93,46 +96,28 @@ class LandingScreen extends StatelessWidget {
                                       const SizedBox(
                                         height: 30,
                                       ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 3,
-                                                color: _focusNode.hasFocus
-                                                    ? AppColors.green
-                                                    : Colors.transparent),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: TextFormField(
-                                          focusNode: _focusNode,
-                                          style: const TextStyle(
-                                              color: Colors.black),
-                                          obscureText: true,
-                                          decoration: InputDecoration(
-                                            fillColor: Colors.white,
-                                            filled: true,
-                                            contentPadding:
-                                                const EdgeInsets.only(left: 15),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            labelText: "Email",
-                                            labelStyle: const TextStyle(
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                      InputField(
+                                          passwordField: false,
+                                          labelText: 'Email',
+                                          onChanged: (value) {
+                                            controller.email = value;
+                                          }),
                                       const SizedBox(
                                         height: 12,
                                       ),
-                                      CustomButton(
-                                        text: 'Continue',
-                                        height: 50,
-                                        backgroundColor: AppColors.green,
-                                        borderColor: AppColors.green,
-                                        textColor: Colors.white,
-                                        onPressed: () {},
-                                        textfontSize: 15,
+                                      Obx(
+                                        () => CustomButton(
+                                          text: 'Continue',
+                                          isLoading: controller.isLoading.value,
+                                          height: 50,
+                                          backgroundColor: AppColors.green,
+                                          borderColor: AppColors.green,
+                                          textColor: Colors.white,
+                                          onPressed: () async {
+                                            await controller.verifyEmail();
+                                          },
+                                          textfontSize: 15,
+                                        ),
                                       ),
                                       const SizedBox(
                                         height: 12,
@@ -195,12 +180,8 @@ class LandingScreen extends StatelessWidget {
                                           ),
                                           InkWell(
                                             onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (_) => SignScreen(),
-                                                ),
-                                              );
+                                              Get.to(() => SignScreen(),
+                                                  binding: SignUpBinding());
                                             },
                                             child: const Text(
                                               'SignUp',

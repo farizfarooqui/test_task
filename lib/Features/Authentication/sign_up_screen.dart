@@ -1,18 +1,18 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test_task/Constant/app_colors.dart';
+import 'package:test_task/Features/Authentication/auth_controller/login_controller.dart';
+import 'package:test_task/Features/Authentication/auth_controller/signup_controller.dart';
 import 'package:test_task/Features/Authentication/widgets/custom_button.dart';
-import 'package:test_task/Features/Profile%20screen/profile_screen.dart';
+import 'package:test_task/Features/Authentication/widgets/custom_text_field.dart';
 
 // ignore: must_be_immutable
 class SignScreen extends StatelessWidget {
   SignScreen({super.key});
-  final _formKey = GlobalKey<FormState>();
-
-  TextEditingController nameController = TextEditingController();
-
-  TextEditingController passController = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
+  final controller = Get.put(SignUpController());
+  final signController = Get.find<SignUpController>();
+  final loginController = Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -99,92 +99,29 @@ class SignScreen extends StatelessWidget {
                                         'Looks like you don\'t have an account.\nlets create a new account for',
                                         style: TextStyle(color: Colors.white),
                                       ),
-                                      const Text(
-                                        'farizfarooqui104@gmail.com',
-                                        style: TextStyle(
+                                      Text(
+                                        loginController.email,
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w800),
                                       ),
                                       const Spacer(),
-                                      Form(
-                                          key: _formKey,
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: _focusNode
-                                                                .hasFocus
-                                                            ? AppColors.green
-                                                            : Colors.grey),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
-                                                child: TextFormField(
-                                                  controller: nameController,
-                                                  focusNode: _focusNode,
-                                                  style: const TextStyle(
-                                                      color: Colors.black),
-                                                  obscureText: false,
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    fillColor: Colors.white,
-                                                    filled: true,
-                                                    contentPadding:
-                                                        EdgeInsets.only(
-                                                            left: 15),
-                                                    border: InputBorder.none,
-                                                    labelText: "Name",
-                                                    labelStyle: TextStyle(
-                                                      color: Colors.grey,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 12,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: _focusNode
-                                                                .hasFocus
-                                                            ? AppColors.green
-                                                            : Colors.grey),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
-                                                child: TextFormField(
-                                                  controller: passController,
-                                                  focusNode: _focusNode,
-                                                  style: const TextStyle(
-                                                      color: Colors.black),
-                                                  obscureText: true,
-                                                  decoration: InputDecoration(
-                                                    fillColor: Colors.white,
-                                                    filled: true,
-                                                    suffixIcon: TextButton(
-                                                      onPressed: () {},
-                                                      child: const Text(
-                                                        'View',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.black),
-                                                      ),
-                                                    ),
-                                                    contentPadding:
-                                                        const EdgeInsets.only(
-                                                            left: 15),
-                                                    border: InputBorder.none,
-                                                    labelText: "Password",
-                                                    labelStyle: const TextStyle(
-                                                      color: Colors.grey,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          )),
+                                      InputField(
+                                        labelText: 'Name',
+                                        onChanged: (value) {
+                                          signController.name = value;
+                                        },
+                                      ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      InputField(
+                                        passwordField: true,
+                                        labelText: 'Password',
+                                        onChanged: (value) {
+                                          signController.password = value;
+                                        },
+                                      ),
                                       const SizedBox(
                                         height: 15,
                                       ),
@@ -219,22 +156,20 @@ class SignScreen extends StatelessWidget {
                                         ),
                                       ),
                                       const Spacer(),
-                                      CustomButton(
-                                          text: 'Agree and Continue',
-                                          height: 60,
-                                          backgroundColor: AppColors.green,
-                                          borderColor: AppColors.green,
-                                          textColor: Colors.white,
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (_) =>
-                                                    const ProfileScreen(),
-                                              ),
-                                            );
-                                          },
-                                          textfontSize: 15),
+                                      Obx(
+                                        () => CustomButton(
+                                            text: 'Agree and Continue',
+                                            isLoading:
+                                                signController.isLoading.value,
+                                            height: 60,
+                                            backgroundColor: AppColors.green,
+                                            borderColor: AppColors.green,
+                                            textColor: Colors.white,
+                                            onPressed: () async {
+                                              signController.signUp();
+                                            },
+                                            textfontSize: 15),
+                                      ),
                                       const Spacer(),
                                     ],
                                   )),
